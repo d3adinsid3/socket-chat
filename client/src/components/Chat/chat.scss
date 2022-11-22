@@ -1,0 +1,45 @@
+.chat {
+  background: #151515;
+  height: 100%;
+
+  &__wrapper {
+    height: 90vh;
+    padding: 25px;
+    margin-bottom: 200px;
+    overflow-y: scroll;
+  }
+
+  &__message {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    max-width: fit-content;
+    max-width: 600px;
+    clear: both;
+    float: left;
+
+    &--yours {
+      float: right;
+    }
+
+    &-username {
+      display: inline-block;
+      padding: 5px;
+      font-size: 12px;
+      background: #fefefe;
+      border-radius: 5px;
+      color: #121212;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__form {
+    border-top: 1px solid #e4e4e4;
+    width: 75%;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    padding: 25px;
+  }
+}
