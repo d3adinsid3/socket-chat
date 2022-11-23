@@ -7,13 +7,7 @@ import Chat from "../Chat";
 import SetNicknameModal from "../SetNicknameModal";
 import SendMessageForm from "../SendMessageForm";
 
-import * as io from "socket.io-client";
-
-const socket = io.connect("http://localhost:4000");
-
 const App = () => {
-  console.log(socket);
-
   return (
     <>
       <Container fluid>
