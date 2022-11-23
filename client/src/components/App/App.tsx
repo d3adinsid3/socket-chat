@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import List from "../List";
 import Chat from "../Chat";
 import SetNicknameModal from "../SetNicknameModal";
+import SendMessageForm from "../SendMessageForm";
 
 import * as io from "socket.io-client";
 
@@ -17,11 +18,12 @@ const App = () => {
     <>
       <Container fluid>
         <Row>
-          <Col xs={3}>
+          <Col xs={12} md={4}>
             <List />
           </Col>
-          <Col xs={9}>
+          <Col>
             <Chat />
+            <SendMessageForm />
           </Col>
         </Row>
       </Container>

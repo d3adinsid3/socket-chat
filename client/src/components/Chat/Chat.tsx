@@ -1,5 +1,4 @@
 import React from "react";
-import SendMessageForm from "../SendMessageForm";
 import "./chat.scss";
 
 const Chat = () => {
@@ -72,10 +71,6 @@ const Chat = () => {
             assumenda earum dignissimos iste minus enim!
           </div>
         </div>
-      </div>
-
-      <div className="chat__form">
-        <SendMessageForm />
       </div>
     </div>
   );
