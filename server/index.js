@@ -18,7 +18,10 @@ const io = new Server(server, {
 });
 
 const users = [];
-const messages = [];
+const messages = [
+  { author: "author1", text: "text1" },
+  { author: "author2", text: "text2" },
+];
 
 // Listen for when the client connects via socket.io-client
 io.on("connection", (socket) => {
@@ -27,6 +30,7 @@ io.on("connection", (socket) => {
   socket.on("join", (nickname) => {
     users.push({ id: socket.id, nickname });
     io.emit("update_user_list", users);
+    io.emit("update_messages", messages);
   });
 
   socket.on("user_typing", () => {

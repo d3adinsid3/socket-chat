@@ -4,13 +4,9 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Modal from "react-bootstrap/Modal";
 import { joinUser } from "../../api";
-import { socket } from "../../constants/api";
-import { useAppDispatch } from "../../hooks/redux";
-import { loadUsers } from "../../redux/reducers/usersSlice";
 import "./set-nickname-modal.scss";
 
 const SetNicknameModal = () => {
-  const dispatch = useAppDispatch();
   const [showModal, setShowModal] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -23,13 +19,6 @@ const SetNicknameModal = () => {
       inputRef.current?.focus();
     }
   };
-
-  React.useEffect(() => {
-    socket.on("update_user_list", (users) => {
-      dispatch(loadUsers(users));
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
 
   return (
     <Modal show={showModal} centered>

@@ -13,6 +13,6 @@ export const watchUserTyping = () => {
   }, 3000);
 };
 
-export const sendMessage = (message: Message) => {
+export const sendMessage = (message: Message): any => {
   socket.emit("chat_message", message);
 };
