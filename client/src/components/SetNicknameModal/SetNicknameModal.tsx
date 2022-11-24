@@ -28,6 +28,7 @@ const SetNicknameModal = () => {
     socket.on("update_user_list", (users) => {
       dispatch(loadUsers(users));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   return (
