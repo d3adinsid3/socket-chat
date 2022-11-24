@@ -3,14 +3,32 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Modal from "react-bootstrap/Modal";
+import { joinUser } from "../../api";
+import { socket } from "../../constants/api";
+import { useAppDispatch } from "../../hooks/redux";
+import { loadUsers } from "../../redux/reducers/usersSlice";
 import "./set-nickname-modal.scss";
 
 const SetNicknameModal = () => {
+  const dispatch = useAppDispatch();
   const [showModal, setShowModal] = React.useState(true);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleSetNickname = () => {
-    setShowModal(false);
+    if (inputRef.current?.value.length) {
+      joinUser(inputRef.current?.value);
+
+      setShowModal(false);
+    } else {
+      inputRef.current?.focus();
+    }
   };
+
+  React.useEffect(() => {
+    socket.on("update_user_list", (users) => {
+      dispatch(loadUsers(users));
+    });
+  }, [socket]);
 
   return (
     <Modal show={showModal} centered>
@@ -20,6 +38,7 @@ const SetNicknameModal = () => {
       <Modal.Body>
         <InputGroup>
           <Form.Control
+            ref={inputRef}
             placeholder="Enter nickname"
             aria-label="Enter nickname"
             aria-describedby="chatNicknane"

@@ -26,6 +26,7 @@ io.on("connection", (socket) => {
 
   socket.on("join", (nickname) => {
     users.push({ id: socket.id, nickname });
+    io.emit("update_user_list", users);
   });
 
   socket.on("user_typing", () => {
@@ -48,19 +49,8 @@ io.on("connection", (socket) => {
       users.findIndex((user) => user.id === socket.id),
       1
     );
+    io.emit("update_user_list", users);
   });
 });
 
 server.listen(4000, () => "Server is running on port 4000");
-
-app.route("/api/users").get((req, res) => {
-  res.send({
-    ...users,
-  });
-});
-
-app.route("/api/messages").get((req, res) => {
-  res.send({
-    ...messages,
-  });
-});

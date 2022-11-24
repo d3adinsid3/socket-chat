@@ -1,6 +1,4 @@
-export const URL = "http://localhost:4000";
+import * as io from "socket.io-client";
 
-export const ENDPOINTS = {
-  users: "/users",
-  messages: "/messages",
-};
+export const URL = "http://localhost:4000";
+export const socket = io.connect(URL);
