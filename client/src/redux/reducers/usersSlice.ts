@@ -4,7 +4,6 @@ import { UsersState } from "../types";
 const initialState: UsersState = {
   loading: true,
   list: [],
-  currentUser: null,
   error: null,
 };
 

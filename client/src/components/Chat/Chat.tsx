@@ -7,7 +7,12 @@ import "./chat.scss";
 const Chat = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.list);
-  const currentUser = users[users.findIndex((user) => user.id === socket.id)];
+  const currentUser = useAppSelector(
+    (state) =>
+      state.users.list[
+        state.users.list.findIndex((user) => user.id === socket.id)
+      ]
+  );
   const messages = useAppSelector((state) => state.messages.list);
 
   React.useEffect(() => {
@@ -25,13 +30,13 @@ const Chat = () => {
               return (
                 <div
                   className={`chat__message ${
-                    currentUser.nickname === message.author
+                    currentUser?.nickname === message.author
                       ? "chat__message--yours"
                       : ""
                   }`}
                   key={index}
                 >
-                  {currentUser.nickname !== message.author ? (
+                  {currentUser?.nickname !== message.author ? (
                     <div className="chat__message-username">
                       {message.author}
                     </div>

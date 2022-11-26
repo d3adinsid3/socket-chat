@@ -6,10 +6,10 @@ export const joinUser = (nickname: string) => {
 };
 
 export const watchUserTyping = () => {
-  socket.emit("user_typing");
+  socket.emit("typing");
 
   setTimeout(() => {
-    socket.emit("user_stopped_typing");
+    socket.emit("stopped_typing");
   }, 3000);
 };
 

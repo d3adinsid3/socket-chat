@@ -28,23 +28,29 @@ io.on("connection", (socket) => {
   console.log(`User connected ${socket.id}`);
 
   socket.on("join", (nickname) => {
-    users.push({ id: socket.id, nickname });
+    users.push({ id: socket.id, nickname, isTyping: false });
     io.emit("update_user_list", users);
     io.emit("update_messages", messages);
   });
 
-  socket.on("user_typing", () => {
-    const user = users[users.findIndex((user) => user.id === socket.id)];
-    user.isTyping = true;
+  socket.on("typing", () => {
+    if (users[users.findIndex((user) => user.id === socket.id)]) {
+      users[users.findIndex((user) => user.id === socket.id)].isTyping = true;
+      io.emit("update_user_list", users);
+    }
   });
 
-  socket.on("user_stopped_typing", () => {
-    const user = users[users.findIndex((user) => user.id === socket.id)];
-    user.isTyping = false;
+  socket.on("stopped_typing", () => {
+    if (users[users.findIndex((user) => user.id === socket.id)]) {
+      users[users.findIndex((user) => user.id === socket.id)].isTyping = false;
+      io.emit("update_user_list", users);
+    }
   });
 
-  socket.on("chat_message", (data) => {
+  socket.on("send_chat_message", (data) => {
     messages.push({ author: data.nickname, text: data.text });
+
+    io.emit("update_messages", messages);
   });
 
   socket.on("disconnect", () => {

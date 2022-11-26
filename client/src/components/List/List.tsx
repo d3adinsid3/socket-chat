@@ -7,13 +7,20 @@ import "./list.scss";
 const List = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.list);
+  const currentUser = useAppSelector(
+    (state) =>
+      state.users.list[
+        state.users.list.findIndex((user) => user.id === socket.id)
+      ]
+  );
 
   React.useEffect(() => {
     socket.on("update_user_list", (users) => {
       dispatch(loadUsers(users));
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
+  }, [socket, users]);
 
   return (
     <div className="list">
@@ -24,6 +31,8 @@ const List = () => {
             return (
               <div className="list__item" key={user.id}>
                 {user.nickname}
+                {currentUser?.id === user.id ? " (you)" : null}
+                {user?.isTyping ? " (typing...)" : null}
               </div>
             );
           })

@@ -1,7 +1,6 @@
 export type UsersState = {
   loading: boolean;
   list: [] | User[];
-  currentUser: null | User;
   error: null | UsersStateError;
 };
 
